@@ -39,13 +39,15 @@ public class Buffer : MonoBehaviour
         var slot = GetNotOccupiedSlot();
         if(!shape.IsInBuffer && slot != -1)
         {
-            slots[slot].occupiedShape = shape;
-            shape.IsInBuffer = true;
             _shapeStorage.shapes.Remove(shape);
             _shapeStorage.CheckIsThereAnyShapesInStorage();
+
             shape.transform.SetParent(transform);
             shape._transform.localPosition = slots[slot].pos;
             shape._startPosition = shape._transform.localPosition;
+            
+            slots[slot].occupiedShape = shape;
+            shape.IsInBuffer = true;
             shapes.Add(shape);
         }
         else

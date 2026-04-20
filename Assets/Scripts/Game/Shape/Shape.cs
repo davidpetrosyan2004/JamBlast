@@ -171,12 +171,16 @@ public class Shape : MonoBehaviour, IPointerClickHandler, IPointerUpHandler, IPo
     public void OnBeginDrag(PointerEventData eventData)
     {
         _transform.localScale = shapeSelectedScale;
+        _transform.pivot = Vector3.zero;
+        _transform.anchorMax = Vector3.zero;
+        _transform.anchorMin = Vector3.zero;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         Vector2 pos;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvas.transform as RectTransform, eventData.position, Camera.main, out pos);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvas.transform as RectTransform, 
+            eventData.position, Camera.main, out pos);
         _transform.localPosition = pos;
     }
 
