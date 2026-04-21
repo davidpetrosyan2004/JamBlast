@@ -192,7 +192,7 @@ public class Grid : MonoBehaviour
                 return;
         }
 
-        if (_buffer.HasFreeSlot() && _shapeStorage.shapes.Count > 0)
+        if (_buffer.HasFreeSlot())
         {
             Debug.Log("No moves, but buffer can still save you");
             return;

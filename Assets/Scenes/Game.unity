@@ -574,8 +574,8 @@ MonoBehaviour:
   rows: 4
   _shapeStorage: {fileID: 1606314715}
   _buffer: {fileID: 1468180210}
-  squareGap: 10
   gridSquare: {fileID: 1180655012282663047, guid: 3ff5373c51ec3c04ab45278c0a7eda21, type: 3}
+  squareGap: 10
   startPosition: {x: -200, y: -300}
   squareScale: 0.9
   everySquareOffset: 0.5
@@ -1092,15 +1092,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShapeStorage
   shapeDatas:
   - {fileID: 11400000, guid: 0d69adf3384125f4c968902749574ba7, type: 2}
-  - {fileID: 11400000, guid: 566825f7b337e264a997d4fac19c394f, type: 2}
-  - {fileID: 11400000, guid: 6a52a05bdebd03144a54390120a8a784, type: 2}
-  - {fileID: 11400000, guid: 47919e952e2da9a48a6f1a12d2ea9c87, type: 2}
-  - {fileID: 11400000, guid: 00e171f1da7a9544da20251cfc35f29a, type: 2}
-  - {fileID: 11400000, guid: 0e438488a4042204d8bbe59b7cc3e146, type: 2}
-  - {fileID: 11400000, guid: 72341f7f400111e4a8d31573a4fbe2c6, type: 2}
-  - {fileID: 11400000, guid: 2090df81aecdb0a4fbc4632f954a9465, type: 2}
-  - {fileID: 11400000, guid: 2eac753d25626bd42bbf0253f622a797, type: 2}
-  - {fileID: 11400000, guid: 4793130e17180d3428f09e9298cfaf06, type: 2}
+  - {fileID: 11400000, guid: 6137e8041dc72ad499acaee9ebb3abb3, type: 2}
+  - {fileID: 11400000, guid: 6e2730cb73df8bd459439914cc47a2e4, type: 2}
+  - {fileID: 11400000, guid: 85d73a42c35f7bd4aa311c22aa476e95, type: 2}
+  - {fileID: 11400000, guid: 55164cda3923c394d8d5f80d2a95ffde, type: 2}
+  - {fileID: 11400000, guid: 7504b6d5c91cc624c9abb0a903c9c3d6, type: 2}
+  - {fileID: 11400000, guid: 87a101b0ee783ce4aaee230609e07e8c, type: 2}
+  - {fileID: 11400000, guid: e91e70d6a18c7b940a9379a5b4349bf4, type: 2}
   capacity: 3
   shapePrefab: {fileID: 8228700521143503706, guid: 0a33bd93192e5b04cb601fcf086660f9, type: 3}
   startPos: {fileID: 386188682}

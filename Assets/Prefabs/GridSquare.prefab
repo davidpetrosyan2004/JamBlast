@@ -56,9 +56,6 @@ MonoBehaviour:
   normalImage: {fileID: 9120276365406160449}
   hooverImage: {fileID: 980544643190765473}
   activeImage: {fileID: 7005698875478944421}
-  Selected: 0
-  SquareOccupied: 0
-  SquareIndex: 0
   normalImages:
   - {fileID: 652341570, guid: 84b52eafdc9567d4ca32ebf709c3d7b8, type: 3}
   - {fileID: -1072284819, guid: 16c953beca207ab4491a7b8bfe50287f, type: 3}
@@ -200,7 +197,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -860015317, guid: 0e31fd36362fb7547b10004597a6c730, type: 3}
+  m_Sprite: {fileID: 246330513, guid: 9a7e2c3d687affb4e8f9a0893c8a84ae, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
