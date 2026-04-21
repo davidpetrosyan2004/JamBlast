@@ -117,6 +117,7 @@ public class Grid : MonoBehaviour
                 gridSquares[squareIndex].GetComponent<GridSquare>().DeactivateSquare();
             }
         }
+        CheckIfPlayerLost();
     }
     private void CheckIfShapeCanBePlaced()
     {
@@ -159,7 +160,6 @@ public class Grid : MonoBehaviour
             Destroy(currentSelectedShape.gameObject);
             _shapeStorage.CheckIsThereAnyShapesInStorage();
             CheckIfLinesCompleted(_lineIndicator.lines);
-            CheckIfPlayerLost();
         }
         else
         {
@@ -262,4 +262,13 @@ public class Grid : MonoBehaviour
             shape.MoveShapeToStartPosition();
         }
     }
+
+    //public void CheckIfPlayerLost()
+    //{
+    //    var validShapes = 0;
+    //    for(var index = 0;  index < _shapeStorage.shapes.Count; index++)
+    //    {
+
+    //    }
+    //}
 }
