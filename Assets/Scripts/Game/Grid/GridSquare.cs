@@ -24,7 +24,10 @@ public class GridSquare : MonoBehaviour
     {
         return hooverImage.gameObject.activeSelf;
     }
-
+    public void SetActivateImage(Sprite sprite)
+    {
+        activeImage.sprite = sprite;
+    }
     public void ActivateSquare()
     {
         hooverImage.gameObject.SetActive(false);

@@ -148,7 +148,9 @@ public class Grid : MonoBehaviour
         {
             foreach (var index in squareIndexes)
             {
-                gridSquares[index].GetComponent<GridSquare>().ActivateSquare();
+                var gridSquareScript = gridSquares[index].GetComponent<GridSquare>();
+                gridSquareScript.SetActivateImage(currentSelectedShape.shapeSprite);
+                gridSquareScript.ActivateSquare();
             }
             if (currentSelectedShape.IsInBuffer)
             {
@@ -180,18 +182,21 @@ public class Grid : MonoBehaviour
     }
     public void CheckIfPlayerLost()
     {
+        List<Shape> allShapes = new List<Shape>();
         foreach (var shape in _shapeStorage.shapes)
         {
-            if (CanPlaceAnyWhere(shape))
-                return;
+            allShapes.Add(shape);
         }
 
-        foreach (var shape in _buffer.shapes)
+        foreach (var shapeBuffer in _buffer.shapes)
         {
-            if (CanPlaceAnyWhere(shape))
+            allShapes.Add(shapeBuffer);
+        }
+        foreach(var sh in allShapes)
+        {
+            if (CanPlaceAnyWhere(sh))
                 return;
         }
-
         if (_buffer.HasFreeSlot())
         {
             Debug.Log("No moves, but buffer can still save you");
@@ -262,13 +267,4 @@ public class Grid : MonoBehaviour
             shape.MoveShapeToStartPosition();
         }
     }
-
-    //public void CheckIfPlayerLost()
-    //{
-    //    var validShapes = 0;
-    //    for(var index = 0;  index < _shapeStorage.shapes.Count; index++)
-    //    {
-
-    //    }
-    //}
 }

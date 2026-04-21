@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class ShapeStorage : MonoBehaviour
 {
     public List<ShapeData> shapeDatas;
+    public List<Sprite> shapeImages;
 
 
     [SerializeField] private int capacity;
@@ -39,8 +40,11 @@ public class ShapeStorage : MonoBehaviour
         for(int i = 0; i < capacity; i++)
         {
             var shape = Instantiate(shapePrefab, shapesPoses[i], Quaternion.identity, transform).GetComponent<Shape>();
+            
             var newShapeData = Random.Range(0, shapeDatas.Count);
-            shape.CreateShape(shapeDatas[newShapeData]);
+            var newShapeImage = Random.Range(0, shapeImages.Count);
+
+            shape.CreateShape(shapeDatas[newShapeData], shapeImages[newShapeImage]);
             shapes.Add(shape);
         }
     }

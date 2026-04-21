@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShapeSquare
   occupiedImage: {fileID: 3718032932922338169}
+  normalImage: {fileID: 6477710116265279824}
 --- !u!50 &3155284589811249943
 Rigidbody2D:
   serializedVersion: 5

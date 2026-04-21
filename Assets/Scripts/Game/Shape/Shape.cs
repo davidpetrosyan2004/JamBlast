@@ -1,10 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
-
+using UnityEngine.UI;
 public class Shape : MonoBehaviour, IPointerClickHandler, IPointerUpHandler, IPointerDownHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     public GameObject squareShapeImage;
+    public Sprite shapeSprite;
     public Vector3 shapeSelectedScale;
     public Vector2 offset;
     public int TotalSquareShapeCount { get; set; }
@@ -28,13 +29,16 @@ public class Shape : MonoBehaviour, IPointerClickHandler, IPointerUpHandler, IPo
         _startPosition = _transform.localPosition;
     }
 
-    public void CreateShape(ShapeData shapeData)
+    public void CreateShape(ShapeData shapeData, Sprite sprite)
     {
         CurrentShapeData = shapeData;
         TotalSquareShapeCount = GetNumberOfSquares(shapeData);
+        shapeSprite = sprite;
         while(_currentShape.Count <= TotalSquareShapeCount)
         {
-            _currentShape.Add(Instantiate(squareShapeImage, transform));
+            var squarePrefab = Instantiate(squareShapeImage, transform);
+            squarePrefab.GetComponent<ShapeSquare>().SetImage(sprite);
+            _currentShape.Add(squarePrefab);
         }
         foreach(var square in _currentShape)
         {
