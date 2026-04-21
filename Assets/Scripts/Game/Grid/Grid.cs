@@ -23,11 +23,15 @@ public class Grid : MonoBehaviour
     private void OnEnable()
     {
         GameEvents.CheckIfShapeCanBePlaced += CheckIfShapeCanBePlaced;
+        GameEvents.CheckIfShapeCanBePlacedInBuffer += CheckIfShapeCanBePlacedInBuffer;
+
     }
 
     private void OnDisable()
     {
         GameEvents.CheckIfShapeCanBePlaced -= CheckIfShapeCanBePlaced;
+        GameEvents.CheckIfShapeCanBePlacedInBuffer -= CheckIfShapeCanBePlacedInBuffer;
+
     }
 
     void Start()
@@ -113,7 +117,6 @@ public class Grid : MonoBehaviour
                 gridSquares[squareIndex].GetComponent<GridSquare>().DeactivateSquare();
             }
         }
-        CheckIfPlayerLost();
     }
     private void CheckIfShapeCanBePlaced()
     {
@@ -187,8 +190,8 @@ public class Grid : MonoBehaviour
             if (CanPlaceAnyWhere(shape))
                 return;
         }
-
-        if (_buffer.IsFull())
+        Debug.Log("Its close game over");
+        if (_buffer.GetFreeShapesCount() < _shapeStorage.shapes.Count)
         {
             Debug.Log("Game Over");
             //GameEvents.GameOver();
@@ -237,5 +240,28 @@ public class Grid : MonoBehaviour
         }
 
         return false;
+    }
+    public void CheckIfShapeCanBePlacedInBuffer()
+    {
+        var shape = _shapeStorage.GetCurrentSelectedShape();
+        var slot = _buffer.GetNotOccupiedSlot();
+        if (!shape.IsInBuffer && slot != -1)
+        {
+            _shapeStorage.shapes.Remove(shape);
+            _shapeStorage.CheckIsThereAnyShapesInStorage();
+
+            shape.transform.SetParent(_buffer.transform);
+            shape._transform.localPosition = _buffer.slots[slot].pos;
+            shape._startPosition = shape._transform.localPosition;
+
+            _buffer.slots[slot].occupiedShape = shape;
+            shape.IsInBuffer = true;
+            _buffer.shapes.Add(shape);
+            CheckIfPlayerLost();
+        }
+        else
+        {
+            shape.MoveShapeToStartPosition();
+        }
     }
 }

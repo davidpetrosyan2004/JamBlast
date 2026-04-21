@@ -10,16 +10,6 @@ public class Buffer : MonoBehaviour
     public List<Shape> shapes = new();
     public List<BufferSlot> slots;
 
-    private void OnEnable()
-    {
-        GameEvents.CheckIfShapeCanBePlacedInBuffer += CheckIfShapeCanBePlacedInBuffer;
-    }
-
-    private void OnDisable()
-    {
-        GameEvents.CheckIfShapeCanBePlacedInBuffer -= CheckIfShapeCanBePlacedInBuffer;
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         collision.gameObject.GetComponentInParent<Shape>().surfaceName = transform.name;
@@ -34,28 +24,7 @@ public class Buffer : MonoBehaviour
             collision.gameObject.GetComponentInParent<Shape>().surfaceName = ".name";
     }
 
-    public void CheckIfShapeCanBePlacedInBuffer()
-    {
-        var shape = _shapeStorage.GetCurrentSelectedShape();
-        var slot = GetNotOccupiedSlot();
-        if(!shape.IsInBuffer && slot != -1)
-        {
-            _shapeStorage.shapes.Remove(shape);
-            _shapeStorage.CheckIsThereAnyShapesInStorage();
-
-            shape.transform.SetParent(transform);
-            shape._transform.localPosition = slots[slot].pos;
-            shape._startPosition = shape._transform.localPosition;
-            
-            slots[slot].occupiedShape = shape;
-            shape.IsInBuffer = true;
-            shapes.Add(shape);
-        }
-        else
-        {
-            shape.MoveShapeToStartPosition();
-        }
-    }
+    
 
     public int GetNotOccupiedSlot()
     {
@@ -89,8 +58,8 @@ public class Buffer : MonoBehaviour
         }
     }
 
-    public bool IsFull()
+    public int GetFreeShapesCount()
     {
-        return shapes.Count == capacity;
+        return capacity - shapes.Count; 
     }
 }
