@@ -58,8 +58,13 @@ public class Buffer : MonoBehaviour
         }
     }
 
-    public int GetFreeShapesCount()
+    public bool HasFreeSlot()
     {
-        return capacity - shapes.Count; 
+        foreach (var slot in slots)
+        {
+            if (slot.occupiedShape == null)
+                return true;
+        }
+        return false;
     }
 }

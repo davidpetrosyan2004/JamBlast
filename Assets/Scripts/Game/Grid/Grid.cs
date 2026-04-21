@@ -159,6 +159,7 @@ public class Grid : MonoBehaviour
             Destroy(currentSelectedShape.gameObject);
             _shapeStorage.CheckIsThereAnyShapesInStorage();
             CheckIfLinesCompleted(_lineIndicator.lines);
+            CheckIfPlayerLost();
         }
         else
         {
@@ -190,16 +191,13 @@ public class Grid : MonoBehaviour
             if (CanPlaceAnyWhere(shape))
                 return;
         }
-        Debug.Log("Its close game over");
-        if (_buffer.GetFreeShapesCount() < _shapeStorage.shapes.Count)
+
+        if (_buffer.HasFreeSlot() && _shapeStorage.shapes.Count > 0)
         {
-            Debug.Log("Game Over");
-            //GameEvents.GameOver();
-        }
-        else
-        {
+            Debug.Log("No moves, but buffer can still save you");
             return;
         }
+        Debug.Log("Game Over");
     }
     private bool CanPlaceAtPosition(Shape shape, int startRow, int startCol)
     {
