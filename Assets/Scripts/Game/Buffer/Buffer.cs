@@ -88,4 +88,9 @@ public class Buffer : MonoBehaviour
                 slot.occupiedShape = null;
         }
     }
+
+    public bool IsFull()
+    {
+        return shapes.Count == capacity;
+    }
 }

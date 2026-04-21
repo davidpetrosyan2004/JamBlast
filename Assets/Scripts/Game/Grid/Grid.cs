@@ -1,22 +1,24 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Rendering;
 
 public class Grid : MonoBehaviour
 {
     public int columns;
     public int rows;
+
+    private LineIndicator _lineIndicator;
     [SerializeField] private ShapeStorage _shapeStorage;
     [SerializeField] private Buffer _buffer;
+    [SerializeField] private GameObject gridSquare;
 
     [SerializeField] private float squareGap = 0.1f;
-    [SerializeField] private GameObject gridSquare;
     [SerializeField] private Vector2 startPosition = new();
     [SerializeField] private float squareScale = 0.5f;
     [SerializeField] private float everySquareOffset = 0f;
 
     private Vector2 offset = new();
     private List<GameObject> gridSquares = new();
-    private LineIndicator _lineIndicator;
 
     private void OnEnable()
     {
@@ -111,6 +113,7 @@ public class Grid : MonoBehaviour
                 gridSquares[squareIndex].GetComponent<GridSquare>().DeactivateSquare();
             }
         }
+        CheckIfPlayerLost();
     }
     private void CheckIfShapeCanBePlaced()
     {
@@ -153,10 +156,6 @@ public class Grid : MonoBehaviour
             Destroy(currentSelectedShape.gameObject);
             _shapeStorage.CheckIsThereAnyShapesInStorage();
             CheckIfLinesCompleted(_lineIndicator.lines);
-            if (CheckIfPlayerLost())
-            {
-                GameEvents.GameOver();
-            }
         }
         else
         {
@@ -175,83 +174,64 @@ public class Grid : MonoBehaviour
         }
         return null;
     }
-    
-    public bool CheckIfPlayerLost()
+    public void CheckIfPlayerLost()
     {
-        List<Shape> allShapes = new List<Shape>();
         foreach (var shape in _shapeStorage.shapes)
         {
-            allShapes.Add(shape);
+            if (CanPlaceAnyWhere(shape))
+                return;
         }
+
         foreach (var shape in _buffer.shapes)
         {
-            allShapes.Add(shape);
+            if (CanPlaceAnyWhere(shape))
+                return;
         }
 
-        int validShapes = 0;
-        foreach (var shape in allShapes)
+        if (_buffer.IsFull())
         {
-            if (CheckIfShapeCanBePlacedInGrid(shape))
-            {
-                validShapes++;
-            }
+            Debug.Log("Game Over");
+            //GameEvents.GameOver();
         }
-        return validShapes == 0;
+        else
+        {
+            return;
+        }
     }
-
-    public bool CheckIfShapeCanBePlacedInGrid(Shape shape)
+    private bool CanPlaceAtPosition(Shape shape, int startRow, int startCol)
     {
         var data = shape.CurrentShapeData;
 
-        int shapeRows = data.rows;
-        int shapeCols = data.columns;
-
-        List<int> shapeIndexes = new();
-
-        int index = 0;
-        for (int i = 0; i < shapeRows; i++)
+        for (int r = 0; r < data.rows; r++)
         {
-            for (int j = 0; j < shapeCols; j++)
+            for (int c = 0; c < data.columns; c++)
             {
-                if (data.board[i].column[j])
-                {
-                    shapeIndexes.Add(index);
-                }
-                index++;
+                if (!data.board[r].column[c])
+                    continue;
+
+                int index = _lineIndicator.squareIndexes[startRow + r, startCol + c];
+
+                var comp = gridSquares[index].GetComponent<GridSquare>();
+
+                if (comp.SquareOccupied)
+                    return false;
             }
         }
 
-        for (int baseRow = 0; baseRow < rows; baseRow++)
+        return true;
+    }
+    public bool CanPlaceAnyWhere(Shape shape)
+    {
+        var data = shape.CurrentShapeData;
+
+        int gridWidth = columns;   // или твой размер
+        int gridHeight = rows;
+
+        for (int startRow = 0; startRow <= gridHeight - data.rows; startRow++)
         {
-            for (int baseCol = 0; baseCol < columns; baseCol++)
+            for (int startCol = 0; startCol <= gridWidth - data.columns; startCol++)
             {
-                bool canPlace = true;
-
-                foreach (var shapeIndex in shapeIndexes)
-                {
-                    int shapeRow = shapeIndex / shapeCols;
-                    int shapeCol = shapeIndex % shapeCols;
-
-                    int gridRow = baseRow + shapeRow;
-                    int gridCol = baseCol + shapeCol;
-
-                    // выход за границы
-                    if (gridRow >= rows || gridCol >= columns)
-                    {
-                        canPlace = false;
-                        break;
-                    }
-
-                    int gridIndex = gridRow * columns + gridCol;
-
-                    if (gridSquares[gridIndex].GetComponent<GridSquare>().SquareOccupied)
-                    {
-                        canPlace = false;
-                        break;
-                    }
-                }
-
-                if (canPlace)
+                if (CanPlaceAtPosition(shape, startRow, startCol))
                     return true;
             }
         }

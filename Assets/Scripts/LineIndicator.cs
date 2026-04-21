@@ -4,7 +4,7 @@ public class LineIndicator
 {
     private int rows;
     private int columns;
-    private int[,] squareIndexes;
+    public int[,] squareIndexes;
     public List<int[]> lines { get; private set; } = new();
 
     public LineIndicator(int rows, int columns)

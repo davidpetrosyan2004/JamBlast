@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a661026317068a45b3391a54388f586, type: 3}
   m_Name: Shape 2
   m_EditorClassIdentifier: Assembly-CSharp::ShapeData
-  columns: 1
-  rows: 2
-  board:
-  - column: 01
-  - column: 01
+  columns: 0
+  rows: 0
+  board: []
