@@ -5,5 +5,6 @@ public class GameEvents : MonoBehaviour
 {
     public static Action CheckIfShapeCanBePlaced;
     public static Action CheckIfShapeCanBePlacedInBuffer;
-
+    public static Action GameOver;
+    public static Action GameWin;
 }

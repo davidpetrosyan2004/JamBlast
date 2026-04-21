@@ -1,8 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
-using Unity.VisualScripting;
-using JetBrains.Annotations;
 
 public class Shape : MonoBehaviour, IPointerClickHandler, IPointerUpHandler, IPointerDownHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
@@ -171,9 +169,6 @@ public class Shape : MonoBehaviour, IPointerClickHandler, IPointerUpHandler, IPo
     public void OnBeginDrag(PointerEventData eventData)
     {
         _transform.localScale = shapeSelectedScale;
-        _transform.pivot = Vector3.zero;
-        _transform.anchorMax = Vector3.zero;
-        _transform.anchorMin = Vector3.zero;
     }
 
     public void OnDrag(PointerEventData eventData)

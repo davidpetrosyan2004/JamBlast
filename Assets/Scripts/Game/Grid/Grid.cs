@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 
 public class Grid : MonoBehaviour
 {
@@ -113,7 +112,6 @@ public class Grid : MonoBehaviour
             }
         }
     }
-
     private void CheckIfShapeCanBePlaced()
     {
         List<Shape> allShapes= new List<Shape>();
@@ -143,7 +141,7 @@ public class Grid : MonoBehaviour
         {
             foreach (var index in squareIndexes)
             {
-                gridSquares[index].GetComponent<GridSquare>().PlaceShapeOnBoard();
+                gridSquares[index].GetComponent<GridSquare>().ActivateSquare();
             }
             if (currentSelectedShape.IsInBuffer)
             {
@@ -155,6 +153,10 @@ public class Grid : MonoBehaviour
             Destroy(currentSelectedShape.gameObject);
             _shapeStorage.CheckIsThereAnyShapesInStorage();
             CheckIfLinesCompleted(_lineIndicator.lines);
+            if (CheckIfPlayerLost())
+            {
+                GameEvents.GameOver();
+            }
         }
         else
         {
@@ -172,5 +174,88 @@ public class Grid : MonoBehaviour
             }
         }
         return null;
+    }
+    
+    public bool CheckIfPlayerLost()
+    {
+        List<Shape> allShapes = new List<Shape>();
+        foreach (var shape in _shapeStorage.shapes)
+        {
+            allShapes.Add(shape);
+        }
+        foreach (var shape in _buffer.shapes)
+        {
+            allShapes.Add(shape);
+        }
+
+        int validShapes = 0;
+        foreach (var shape in allShapes)
+        {
+            if (CheckIfShapeCanBePlacedInGrid(shape))
+            {
+                validShapes++;
+            }
+        }
+        return validShapes == 0;
+    }
+
+    public bool CheckIfShapeCanBePlacedInGrid(Shape shape)
+    {
+        var data = shape.CurrentShapeData;
+
+        int shapeRows = data.rows;
+        int shapeCols = data.columns;
+
+        List<int> shapeIndexes = new();
+
+        int index = 0;
+        for (int i = 0; i < shapeRows; i++)
+        {
+            for (int j = 0; j < shapeCols; j++)
+            {
+                if (data.board[i].column[j])
+                {
+                    shapeIndexes.Add(index);
+                }
+                index++;
+            }
+        }
+
+        for (int baseRow = 0; baseRow < rows; baseRow++)
+        {
+            for (int baseCol = 0; baseCol < columns; baseCol++)
+            {
+                bool canPlace = true;
+
+                foreach (var shapeIndex in shapeIndexes)
+                {
+                    int shapeRow = shapeIndex / shapeCols;
+                    int shapeCol = shapeIndex % shapeCols;
+
+                    int gridRow = baseRow + shapeRow;
+                    int gridCol = baseCol + shapeCol;
+
+                    // выход за границы
+                    if (gridRow >= rows || gridCol >= columns)
+                    {
+                        canPlace = false;
+                        break;
+                    }
+
+                    int gridIndex = gridRow * columns + gridCol;
+
+                    if (gridSquares[gridIndex].GetComponent<GridSquare>().SquareOccupied)
+                    {
+                        canPlace = false;
+                        break;
+                    }
+                }
+
+                if (canPlace)
+                    return true;
+            }
+        }
+
+        return false;
     }
 }

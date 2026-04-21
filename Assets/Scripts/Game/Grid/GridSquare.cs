@@ -76,9 +76,4 @@ public class GridSquare : MonoBehaviour
             collision.GetComponent<ShapeSquare>().UnSetOccupied();
         }
     }
-
-    public void PlaceShapeOnBoard()
-    {
-        ActivateSquare();
-    }
 }

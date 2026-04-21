@@ -47,7 +47,6 @@ public class ShapeStorage : MonoBehaviour
 
     public void CheckIsThereAnyShapesInStorage()
     {
-        Debug.Log(shapes.Count);
         if (shapes.Count <= 0)
         {
             SpawnNewShapes();
