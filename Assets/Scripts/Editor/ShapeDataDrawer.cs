@@ -1,86 +1,87 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(ShapeData), false)]
+[CustomEditor(typeof(ShapeData))]
 [CanEditMultipleObjects]
-[System.Serializable]
 public class ShapeDataDrawer : Editor
 {
-    private ShapeData ShapeDataInstance => target as ShapeData;
+    private ShapeData Data => (ShapeData)target;
 
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
-        ClearBoardButton();
+
+        EditorGUI.BeginChangeCheck();
+
+        DrawSizeFields();
         EditorGUILayout.Space();
 
-        DrawColumnsInputFields();
+        DrawButtons();
         EditorGUILayout.Space();
 
-        if(ShapeDataInstance.board != null && ShapeDataInstance.columns > 0 && ShapeDataInstance.rows > 0)
+        if (IsBoardValid())
         {
-            DrawBoardTable();
+            DrawBoard();
+        }
+
+        if (EditorGUI.EndChangeCheck())
+        {
+            EditorUtility.SetDirty(Data);
         }
 
         serializedObject.ApplyModifiedProperties();
-        if (GUI.changed)
+    }
+
+    private void DrawSizeFields()
+    {
+        int newColumns = EditorGUILayout.IntField("Columns", Data.columns);
+        int newRows = EditorGUILayout.IntField("Rows", Data.rows);
+
+        if ((newColumns != Data.columns || newRows != Data.rows) && newColumns > 0 && newRows > 0)
         {
-            EditorUtility.SetDirty(ShapeDataInstance);
+            Data.columns = newColumns;
+            Data.rows = newRows;
+            Data.CreateNewBoard();
         }
     }
 
-    public void ClearBoardButton()
+    private void DrawButtons()
     {
-        if(GUILayout.Button("Clear Board"))
+        if (GUILayout.Button("Clear Board"))
         {
-            ShapeDataInstance.Clear();
-            GUI.changed = true;
-        } 
-    }
-
-    private void DrawColumnsInputFields()
-    {
-        var columnsTemp = ShapeDataInstance.columns;
-        var rowsTemp = ShapeDataInstance.rows;
-
-        ShapeDataInstance.columns = EditorGUILayout.IntField("Columns", ShapeDataInstance.columns);
-        ShapeDataInstance.rows = EditorGUILayout.IntField("Rows", ShapeDataInstance.rows);
-
-        if((ShapeDataInstance.columns != columnsTemp || ShapeDataInstance.rows != rowsTemp) &&
-            ShapeDataInstance.columns > 0 && ShapeDataInstance.rows > 0)
-        {
-            ShapeDataInstance.CreateNewBoard();
+            Data.Clear();
         }
     }
 
-    private void DrawBoardTable()
+    private bool IsBoardValid()
     {
-        var tableStyle = new GUIStyle("box");
-        tableStyle.padding = new RectOffset(10, 10, 10, 10);
-        tableStyle.margin.left = 12;
+        return Data.board != null &&
+               Data.board.Length == Data.rows &&
+               Data.columns > 0 &&
+               Data.rows > 0;
+    }
 
-        var headerColumnStyle = new GUIStyle();
-        headerColumnStyle.fixedWidth = 65;
-        headerColumnStyle.alignment = TextAnchor.MiddleCenter;
-
-        var rowStyle = new GUIStyle();
-        rowStyle.fixedWidth = 25;
-        rowStyle.alignment = TextAnchor.MiddleCenter;
-
-        var dataFieldStyle = new GUIStyle(EditorStyles.miniButtonMid);
-        dataFieldStyle.normal.background = Texture2D.grayTexture;
-        dataFieldStyle.onNormal.background = Texture2D.whiteTexture;
-
-        for(int row = 0; row < ShapeDataInstance.rows; row++)
+    private void DrawBoard()
+    {
+        for (int row = 0; row < Data.rows; row++)
         {
-            EditorGUILayout.BeginHorizontal(headerColumnStyle);
-            for(int col = 0; col < ShapeDataInstance.columns; col++)
+            if (Data.board[row] == null || Data.board[row].column == null)
+                continue;
+
+            EditorGUILayout.BeginHorizontal();
+
+            for (int col = 0; col < Data.columns; col++)
             {
-                EditorGUILayout.BeginHorizontal(rowStyle);
-                var data = EditorGUILayout.Toggle(ShapeDataInstance.board[row].column[col], dataFieldStyle);
-                ShapeDataInstance.board[row].column[col] = data;
-                EditorGUILayout.EndHorizontal();
+                bool value = Data.board[row].column[col];
+
+                bool newValue = GUILayout.Toggle(value, "", GUILayout.Width(25), GUILayout.Height(25));
+
+                if (value != newValue)
+                {
+                    Data.board[row].column[col] = newValue;
+                }
             }
+
             EditorGUILayout.EndHorizontal();
         }
     }

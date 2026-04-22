@@ -14,7 +14,7 @@ public class Shape : MonoBehaviour, IPointerClickHandler, IPointerUpHandler, IPo
     public bool IsInBuffer;
     public string surfaceName { get; set; }
 
-    // [HideInInspector]
+    [HideInInspector]
     public ShapeData CurrentShapeData;
 
     private List<GameObject> _currentShape = new List<GameObject>();
@@ -34,13 +34,13 @@ public class Shape : MonoBehaviour, IPointerClickHandler, IPointerUpHandler, IPo
         CurrentShapeData = shapeData;
         TotalSquareShapeCount = GetNumberOfSquares(shapeData);
         shapeSprite = sprite;
-        while(_currentShape.Count <= TotalSquareShapeCount)
+        while (_currentShape.Count <= TotalSquareShapeCount)
         {
             var squarePrefab = Instantiate(squareShapeImage, transform);
             squarePrefab.GetComponent<ShapeSquare>().SetImage(sprite);
             _currentShape.Add(squarePrefab);
         }
-        foreach(var square in _currentShape)
+        foreach (var square in _currentShape)
         {
             square.gameObject.transform.position = Vector3.zero;
             square.gameObject.SetActive(false);
@@ -50,112 +50,29 @@ public class Shape : MonoBehaviour, IPointerClickHandler, IPointerUpHandler, IPo
             squareRect.rect.height * squareRect.localScale.y);
 
         int currentIndexInList = 0;
-        for(int row = 0; row < shapeData.rows; row++)
+
+        float offsetX = (shapeData.columns - 1) / 2f;
+        float offsetY = (shapeData.rows - 1) / 2f;
+
+        for (int row = 0; row < shapeData.rows; row++)
         {
-            for(int col = 0; col < shapeData.columns; col++)
+            for (int col = 0; col < shapeData.columns; col++)
             {
                 if (shapeData.board[row].column[col])
                 {
                     _currentShape[currentIndexInList].SetActive(true);
-                    _currentShape[currentIndexInList].GetComponent<RectTransform>().localPosition = 
-                        new Vector2(GetXPositionForShapeSquare(shapeData, col, moveDistance),
-                        GetYPositionForShapeSquare(shapeData, row, moveDistance));
+
+                    float posX = (col - offsetX) * moveDistance.x;
+                    float posY = (offsetY - row) * moveDistance.y;
+
+                    _currentShape[currentIndexInList]
+                        .GetComponent<RectTransform>()
+                        .localPosition = new Vector2(posX, posY);
+
                     currentIndexInList++;
                 }
             }
         }
-    }
-
-    private float GetYPositionForShapeSquare(ShapeData shapeData, int row, Vector2 moveDistance)
-    {
-        float shiftOnY = 0;
-        if(shapeData.rows > 1)
-        {
-            if(shapeData.rows % 2 != 0)
-            {
-                var middleSquareIndex = (shapeData.rows - 1) / 2;
-                var multiplier = (shapeData.rows - 1) / 2;
-                if(row < middleSquareIndex)
-                {
-                    shiftOnY = moveDistance.y * 1;
-                    shiftOnY *= multiplier;
-                }
-                else if(row > middleSquareIndex)
-                {
-                    shiftOnY = moveDistance.y - 1;
-                    shiftOnY *= multiplier;
-                }
-            }
-            else
-            {
-                var middleSquareIndex2 = (shapeData.rows == 2) ? 1 : (shapeData.rows / 2);
-                var middleSquareIndex1 = (shapeData.rows == 2) ? 0 : (shapeData.rows - 2);
-                var multiplier = shapeData.rows / 2;
-
-                if(row == middleSquareIndex1 || row == middleSquareIndex2)
-                {
-                    if(row == middleSquareIndex2) shiftOnY = (moveDistance.y / 2) * -1;
-                    if (row == middleSquareIndex1) shiftOnY = (moveDistance.y / 2);
-                }
-                if(row < middleSquareIndex2 && row < middleSquareIndex1)
-                {
-                    shiftOnY = moveDistance.y * 1;
-                    shiftOnY *= multiplier;
-                }
-                else if (row > middleSquareIndex1 && row > middleSquareIndex2)
-                {
-                    shiftOnY = moveDistance.y * -1;
-                    shiftOnY *= multiplier;
-                }
-            }
-        }
-        return shiftOnY;
-    }
-
-    private float GetXPositionForShapeSquare(ShapeData shapeData, int column, Vector2 moveDistance)
-    {
-        float shiftOnX = 0;
-        if(shapeData.columns > 1)
-        {
-            if(shapeData.columns % 2 != 0)
-            {
-                var middleSquareIndex = (shapeData.columns - 1) / 2;
-                var multiplier = (shapeData.columns - 1) / 2;
-                if(column < middleSquareIndex)
-                {
-                    shiftOnX = moveDistance.x * -1;
-                    shiftOnX *= multiplier;
-                }
-                else if(column > middleSquareIndex)
-                {
-                    shiftOnX = moveDistance.x * 1;
-                    shiftOnX *= multiplier;
-                }
-            }
-            else
-            {
-                var middleSquareIndex2 = (shapeData.columns == 2) ? 1 : (shapeData.columns / 2);
-                var middleSquareIndex1 = (shapeData.columns == 2) ? 0 : (shapeData.columns - 2);
-                var multiplier = shapeData.columns / 2;
-
-                if(column == middleSquareIndex1 || column == middleSquareIndex2)
-                {
-                    if (column == middleSquareIndex2) shiftOnX = moveDistance.x / 2;
-                    if(column == middleSquareIndex1) shiftOnX = (moveDistance.x / 2) * -1; 
-                }
-                if(column < middleSquareIndex1 && column < middleSquareIndex2)
-                {
-                    shiftOnX = moveDistance.x * -1;
-                    shiftOnX *= multiplier;
-                }
-                else if(column > middleSquareIndex1 && column > middleSquareIndex2)
-                {
-                    shiftOnX = moveDistance.x * 1;
-                    shiftOnX *= multiplier;
-                }
-            }
-        }
-        return shiftOnX;
     }
 
     private int GetNumberOfSquares(ShapeData shapeData)
