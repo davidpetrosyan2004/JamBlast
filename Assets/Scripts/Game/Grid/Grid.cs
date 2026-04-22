@@ -107,7 +107,12 @@ public class Grid : MonoBehaviour
             }
             if (IsLineCompleted)
             {
+                AudioManager.Instance.PlaySound("LineCompleted");
                 completedLines.Add(line);
+            }
+            else
+            {
+                AudioManager.Instance.PlaySound("PlaceShape");
             }
         }
 

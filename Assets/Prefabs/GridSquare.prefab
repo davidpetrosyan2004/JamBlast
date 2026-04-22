@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 5719547932240438890}
   - component: {fileID: 4822580673724288014}
   m_Layer: 0
-  m_Name: Particl
+  m_Name: Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

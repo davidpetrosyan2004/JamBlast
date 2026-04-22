@@ -173,6 +173,7 @@ public class Shape : MonoBehaviour, IPointerClickHandler, IPointerUpHandler, IPo
     public void OnBeginDrag(PointerEventData eventData)
     {
         _transform.localScale = shapeSelectedScale;
+        AudioManager.Instance.PlaySound("ShapePickUp", true);
     }
 
     public void OnDrag(PointerEventData eventData)
