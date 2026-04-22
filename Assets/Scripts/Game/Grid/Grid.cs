@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Rendering;
+using DG.Tweening;
 
 public class Grid : MonoBehaviour
 {
@@ -253,9 +254,15 @@ public class Grid : MonoBehaviour
             _shapeStorage.shapes.Remove(shape);
             _shapeStorage.CheckIsThereAnyShapesInStorage();
 
-            shape.transform.SetParent(_buffer.transform);
-            shape._transform.localPosition = _buffer.slots[slot].pos;
-            shape._startPosition = shape._transform.localPosition;
+            shape.transform.SetParent(_buffer.transform, false);
+
+            shape.transform
+                .DOLocalMove(_buffer.slots[slot].pos, 0.2f)
+                .SetEase(Ease.InOutQuad)
+                .OnComplete(() =>
+                {
+                    shape._startPosition = shape._transform.localPosition;
+                });
 
             _buffer.slots[slot].occupiedShape = shape;
             shape.IsInBuffer = true;

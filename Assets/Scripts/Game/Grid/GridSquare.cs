@@ -8,6 +8,7 @@ public class GridSquare : MonoBehaviour
     [SerializeField] private Image normalImage;
     [SerializeField] private Image hooverImage;
     [SerializeField] private Image activeImage;
+    [SerializeField] private ParticleSystem gridEffect;
     public bool Selected { get; set; }
     public bool SquareOccupied { get; set; }
     public int SquareIndex { get; set; }
@@ -37,6 +38,7 @@ public class GridSquare : MonoBehaviour
     }
     public void DeactivateSquare()
     {
+        gridEffect.Play();
         activeImage.gameObject.SetActive(false);
         Selected = false;
         SquareOccupied = false;

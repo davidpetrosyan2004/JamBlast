@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
+using DG.Tweening;
 public class Shape : MonoBehaviour, IPointerClickHandler, IPointerUpHandler, IPointerDownHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     public GameObject squareShapeImage;
@@ -212,6 +212,6 @@ public class Shape : MonoBehaviour, IPointerClickHandler, IPointerUpHandler, IPo
 
     public void MoveShapeToStartPosition()
     {
-        _transform.localPosition = _startPosition;
+        _transform.DOLocalMove(_startPosition, 0.2f).SetEase(Ease.InOutQuad);
     }
 }
