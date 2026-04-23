@@ -111,7 +111,7 @@ public class Grid : MonoBehaviour
             }
             else
             {
-                AudioManager.Instance.PlaySound("PlaceShape");
+                AudioManager.Instance.PlaySound("ShapePlaceInBoard");
             }
         }
 
