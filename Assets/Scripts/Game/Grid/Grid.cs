@@ -57,7 +57,7 @@ public class Grid : MonoBehaviour
                 var currentSquare = Instantiate(gridSquare);
                 currentSquare.transform.SetParent(transform);
                 currentSquare.transform.localScale = new Vector3(squareScale, squareScale, squareScale);
-                currentSquare.GetComponent<GridSquare>().SetImage(square_index % 2 == 0);
+                currentSquare.GetComponent<GridSquare>().SetImage(false);
                 currentSquare.GetComponent<GridSquare>().SquareIndex = square_index;
                 gridSquares.Add(currentSquare);
                 square_index++;
@@ -69,24 +69,26 @@ public class Grid : MonoBehaviour
     {
         int column_number = 0;
         int row_number = 0;
-        Vector2 square_gap_number = new();
 
         var square_rect = gridSquares[0].GetComponent<RectTransform>();
 
-        offset.x = square_rect.rect.width * square_rect.transform.localScale.x + everySquareOffset;
-        offset.y = square_rect.rect.height * square_rect.transform.localScale.y + everySquareOffset;
-        
+        offset.x = square_rect.rect.width * square_rect.transform.localScale.x;
+        offset.y = square_rect.rect.height * square_rect.transform.localScale.y;
+
         foreach (var square in gridSquares)
         {
-            if(column_number > columns - 1)
+            if (column_number >= columns)
             {
                 column_number = 0;
                 row_number++;
             }
-            var pos_x_offset = offset.x * column_number + (square_gap_number.x * squareGap);
-            var pos_y_offset = offset.y * row_number + (square_gap_number.y * squareGap);
 
-            square.GetComponent<RectTransform>().localPosition = new Vector3(startPosition.x + pos_x_offset, startPosition.y + pos_y_offset);
+            float posX = column_number * (offset.x + squareGap);
+            float posY = row_number * (offset.y + squareGap);
+
+            square.GetComponent<RectTransform>().localPosition =
+                new Vector3(startPosition.x + posX, startPosition.y - posY);
+
             column_number++;
         }
     }
