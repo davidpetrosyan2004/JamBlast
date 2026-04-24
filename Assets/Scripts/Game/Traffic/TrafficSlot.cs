@@ -4,5 +4,5 @@ using UnityEngine;
 public class TrafficSlot : MonoBehaviour
 {
     public Transform point;
-    public Car car; // кто стоит в этом слоте
+    public Car car;
 }

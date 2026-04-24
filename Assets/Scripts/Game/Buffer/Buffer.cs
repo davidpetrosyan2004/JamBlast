@@ -20,7 +20,7 @@ public class Buffer : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         if(collision.gameObject !=  null) 
-            collision.gameObject.GetComponentInParent<Shape>().surfaceName = ".name";
+            collision.gameObject.GetComponentInParent<Shape>().surfaceName = "Grid";
     }
 
     

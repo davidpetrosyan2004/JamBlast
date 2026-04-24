@@ -157,3 +157,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2355b8d466dfd154bb5e49451b02663e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficSlot
+  point: {fileID: 784041975287038665}
+  car: {fileID: 0}

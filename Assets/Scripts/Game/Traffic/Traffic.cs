@@ -9,11 +9,15 @@ public class Traffic : MonoBehaviour
     public List<TrafficSlot> trafficSlots = new();
     public List<TrafficSlot> parkingSlots = new();
 
+    private Vector3[] pathPoints;
+
     private Queue<Car> queue = new();
+    [SerializeField] private LineRenderer parkingLine; 
 
     private void Start()
     {
-        for(int i = 0; i < trafficSlots.Count; i++ )
+        parkingLine.GetPositions(pathPoints = new Vector3[parkingLine.positionCount]);
+        for (int i = 0; i < 10; i++ )
         {
             SpawnCar();
         }
@@ -33,7 +37,6 @@ public class Traffic : MonoBehaviour
     }
     void TrySendToParking()
     {
-        // первая машина в линии
         var firstSlot = trafficSlots[0];
 
         if (firstSlot.car == null)
@@ -45,9 +48,9 @@ public class Traffic : MonoBehaviour
             {
                 var car = firstSlot.car;
 
-                // отправляем в парковку
                 parking.car = car;
-                car.MoveTo(parking.point.position);
+
+                car.MoveAlongPath(parking.point.position, pathPoints);
 
                 firstSlot.car = null;
 
