@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.Rendering;
 public class GridSquare : MonoBehaviour
 {
     [SerializeField] private Image normalImage;
@@ -38,19 +39,19 @@ public class GridSquare : MonoBehaviour
         switch (sprite.name)
         {
             case "squares_1":
-                currentActiveSquare.SetColor("Green");
+                currentActiveSquare.SetColor(CarData.CarColor.Green);
                 break;
             case "squares_2":
-                currentActiveSquare.SetColor("Yellow");
+                currentActiveSquare.SetColor(CarData.CarColor.Yellow);
                 break;
             case "squares_3":
-                currentActiveSquare.SetColor("Blue");
+                currentActiveSquare.SetColor(CarData.CarColor.Blue);
                 break;
             case "squares_4":
-                currentActiveSquare.SetColor("Orange");
+                currentActiveSquare.SetColor(CarData.CarColor.Orange);
                 break;
             case "squares_5":
-                currentActiveSquare.SetColor("Purple");
+                currentActiveSquare.SetColor(CarData.CarColor.Purple);
                 break;
         }
     }
@@ -68,6 +69,7 @@ public class GridSquare : MonoBehaviour
         Selected = false;
         SquareOccupied = false;
         activeSquarePrefab.SetActive(true);
+        activeSquarePrefab.GetComponent<SmallActiveSquare>().MoveToCars();
     }
 
     public void SetImage(bool IsFirstImage)

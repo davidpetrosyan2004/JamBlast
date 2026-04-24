@@ -18,17 +18,17 @@ public class Traffic : MonoBehaviour
     
     private Vector3[] pathPoints;
 
-    public Material GetMaterial(string color)
+    public Material GetMaterial(CarData.CarColor color)
     {
-        if(color == "Purple")
+        if(color == CarData.CarColor.Purple)
             return materials[0];
-        else if (color == "Green")
+        else if (color == CarData.CarColor.Green)
             return materials[1];
-        else if (color == "Blue")
+        else if (color == CarData.CarColor.Blue)
             return materials[2];
-        else if (color == "Yellow")
+        else if (color == CarData.CarColor.Yellow)
             return materials[3];
-        else if (color == "Orange")
+        else if (color == CarData.CarColor.Orange)
             return materials[4];
         else
             return null;
@@ -48,7 +48,7 @@ public class Traffic : MonoBehaviour
         var car = Instantiate(carPrefab, spawnPoint.position, Quaternion.identity)
                   .GetComponent<Car>();
         car.SetCapacityText(carDatas[carDataIndex].capacity);
-        car.SetColor(GetMaterial(carDatas[carDataIndex].carColor.ToString()));
+        car.SetColor(GetMaterial(carDatas[carDataIndex].carColor), carDatas[carDataIndex].carColor);
         queue.Enqueue(car);
         carDataIndex++;
     }

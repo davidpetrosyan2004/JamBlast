@@ -7,10 +7,10 @@ public class CarData : ScriptableObject
     public CarColor carColor;
     public enum CarColor
     {
-        Purple = 0,
-        Green = 1,
-        Blue = 2,
-        Yellow = 3,
-        Orange = 4
+        Purple,
+        Green,
+        Blue,
+        Yellow,
+        Orange
     }
 }

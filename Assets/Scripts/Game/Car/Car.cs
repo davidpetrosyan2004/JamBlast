@@ -9,19 +9,19 @@ public class Car : MonoBehaviour
     public bool IsMoving { get; private set; }
     public int capacity { get; private set; }
     public List<MeshRenderer> meshes;
-    public string carColor; 
+    public CarData.CarColor carColor; 
 
     [SerializeField] private float speed = 5f;
     [SerializeField] private ParticleSystem smokeEffect;
     [SerializeField] private TextMeshProUGUI capcityText;
 
-    public void SetColor(Material material)
+    public void SetColor(Material material, CarData.CarColor color)
     {
         foreach (var mesh in meshes)
         {
             mesh.material = material;
         }
-        carColor = material.name;
+        carColor = color;
     }
 
     public void SetCapacityText(int number)

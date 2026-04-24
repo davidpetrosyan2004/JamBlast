@@ -91,7 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SmallActiveSquare
   spriteRenderer: {fileID: 8461916327131311286}
   trail: {fileID: 4138591547949923049}
-  squareColor: 
+  parkings: {fileID: 2252728165000785752, guid: bc4e3c84d9da4044884e1d559d91b636, type: 3}
 --- !u!1 &6599878079911745537
 GameObject:
   m_ObjectHideFlags: 0
