@@ -9,6 +9,7 @@ public class Car : MonoBehaviour
     public bool IsMoving { get; private set; }
     public int capacity { get; private set; }
     public List<MeshRenderer> meshes;
+    public string carColor; 
 
     [SerializeField] private float speed = 5f;
     [SerializeField] private ParticleSystem smokeEffect;
@@ -20,6 +21,7 @@ public class Car : MonoBehaviour
         {
             mesh.material = material;
         }
+        carColor = material.name;
     }
 
     public void SetCapacityText(int number)
@@ -118,13 +120,11 @@ public class Car : MonoBehaviour
 
         Vector3[] result = new Vector3[targetIndex + 2];
 
-        // сначала путь
         for (int i = 0; i <= targetIndex; i++)
         {
             result[i] = path[i];
         }
 
-        // в конце target
         result[result.Length - 1] = target;
 
         return result;
@@ -135,7 +135,7 @@ public class Car : MonoBehaviour
         if (other == this) return;
         if (other.CompareTag("ScaleCar"))
         {
-            transform.DOScale(2, 0.2f).SetLoops(1, LoopType.Yoyo);
+            transform.DOScale(1.5f, 0.2f).SetLoops(1, LoopType.Yoyo);
         } 
     }
 }

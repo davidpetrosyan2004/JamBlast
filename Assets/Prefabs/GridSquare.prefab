@@ -58,6 +58,7 @@ MonoBehaviour:
   hooverImage: {fileID: 980544643190765473}
   activeImage: {fileID: 7005698875478944421}
   gridEffect: {fileID: 5719547932240438890}
+  activeSquare: {fileID: 540960567324336330, guid: f19bcfd686484d246ad1a20476592034, type: 3}
   normalImages:
   - {fileID: 652341570, guid: 84b52eafdc9567d4ca32ebf709c3d7b8, type: 3}
   - {fileID: -1072284819, guid: 16c953beca207ab4491a7b8bfe50287f, type: 3}
@@ -162,7 +163,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7912407000366014722}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

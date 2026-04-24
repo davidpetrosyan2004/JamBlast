@@ -7,6 +7,8 @@ public class GridSquare : MonoBehaviour
     [SerializeField] private Image hooverImage;
     [SerializeField] private Image activeImage;
     [SerializeField] private ParticleSystem gridEffect;
+    [SerializeField] private GameObject activeSquare;
+    private GameObject activeSquarePrefab;
     public bool Selected { get; set; }
     public bool SquareOccupied { get; set; }
     public int SquareIndex { get; set; }
@@ -26,6 +28,31 @@ public class GridSquare : MonoBehaviour
     public void SetActivateImage(Sprite sprite)
     {
         activeImage.sprite = sprite;
+
+        activeSquarePrefab = Instantiate(activeSquare, transform.position, Quaternion.identity, transform);
+        activeSquarePrefab.SetActive(false);
+
+        var currentActiveSquare = activeSquarePrefab.GetComponent<SmallActiveSquare>();
+        currentActiveSquare.SetSprite(sprite);
+
+        switch (sprite.name)
+        {
+            case "squares_1":
+                currentActiveSquare.SetColor("Green");
+                break;
+            case "squares_2":
+                currentActiveSquare.SetColor("Yellow");
+                break;
+            case "squares_3":
+                currentActiveSquare.SetColor("Blue");
+                break;
+            case "squares_4":
+                currentActiveSquare.SetColor("Orange");
+                break;
+            case "squares_5":
+                currentActiveSquare.SetColor("Purple");
+                break;
+        }
     }
     public void ActivateSquare()
     {
@@ -40,6 +67,7 @@ public class GridSquare : MonoBehaviour
         activeImage.gameObject.SetActive(false);
         Selected = false;
         SquareOccupied = false;
+        activeSquarePrefab.SetActive(true);
     }
 
     public void SetImage(bool IsFirstImage)

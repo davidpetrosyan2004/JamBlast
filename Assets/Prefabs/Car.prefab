@@ -5653,6 +5653,7 @@ MonoBehaviour:
   - {fileID: 6205467430822301170}
   - {fileID: 7032347176523429325}
   - {fileID: 2759321857983444466}
+  carColor: 
   speed: 5
   smokeEffect: {fileID: 5938086731280985834}
   capcityText: {fileID: 4140627732083446013}
