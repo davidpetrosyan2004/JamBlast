@@ -4,7 +4,8 @@ using DG.Tweening;
 public class Car : MonoBehaviour
 {
     public bool IsMoving { get; private set; }
-    [SerializeField] private float speed = 3f;
+    [SerializeField] private float speed = 4f;
+    [SerializeField] private ParticleSystem smokeEffect; 
     public void MoveTo(Vector3 target)
     {
         StopAllCoroutines();
@@ -44,7 +45,7 @@ public class Car : MonoBehaviour
         var pathToTarget = GetPathToTarget(target, pathPoints);
 
         int index = 0;
-
+        smokeEffect.Play();
         while (index < pathToTarget.Length)
         {
             Vector3 nextPoint = pathToTarget[index];
@@ -57,7 +58,6 @@ public class Car : MonoBehaviour
                 {
                     transform.rotation = Quaternion.LookRotation(direction);
                 }
-
                 transform.position = Vector3.MoveTowards(
                     transform.position,
                     nextPoint,
@@ -71,6 +71,7 @@ public class Car : MonoBehaviour
         }
 
         IsMoving = false;
+        smokeEffect.Stop();
     }
 
     int GetClosestIndex(Vector3 pos, Vector3[] points)
@@ -106,5 +107,14 @@ public class Car : MonoBehaviour
         result[result.Length - 1] = target;
 
         return result;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other == this) return;
+        if (other.CompareTag("ScaleCar"))
+        {
+            transform.DOScale(2, 0.2f).SetLoops(1, LoopType.Yoyo);
+        } 
     }
 }
