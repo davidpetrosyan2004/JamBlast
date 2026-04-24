@@ -8,16 +8,36 @@ public class Traffic : MonoBehaviour
 
     public List<TrafficSlot> trafficSlots = new();
     public List<TrafficSlot> parkingSlots = new();
+    public List<Material> materials = new();
 
-    private Vector3[] pathPoints;
+    [SerializeField] private LineRenderer parkingLine; 
+    [SerializeField] private List<CarData> carDatas;
+    private int carDataIndex = 0;
 
     private Queue<Car> queue = new();
-    [SerializeField] private LineRenderer parkingLine; 
+    
+    private Vector3[] pathPoints;
+
+    public Material GetMaterial(string color)
+    {
+        if(color == "Purple")
+            return materials[0];
+        else if (color == "Green")
+            return materials[1];
+        else if (color == "Blue")
+            return materials[2];
+        else if (color == "Yellow")
+            return materials[3];
+        else if (color == "Orange")
+            return materials[4];
+        else
+            return null;
+    }
 
     private void Start()
     {
         parkingLine.GetPositions(pathPoints = new Vector3[parkingLine.positionCount]);
-        for (int i = 0; i < 10; i++ )
+        for (int i = 0; i < carDatas.Count; i++ )
         {
             SpawnCar();
         }
@@ -27,8 +47,10 @@ public class Traffic : MonoBehaviour
     {
         var car = Instantiate(carPrefab, spawnPoint.position, Quaternion.identity)
                   .GetComponent<Car>();
-
+        car.SetCapacityText(carDatas[carDataIndex].capacity);
+        car.SetColor(GetMaterial(carDatas[carDataIndex].carColor.ToString()));
         queue.Enqueue(car);
+        carDataIndex++;
     }
     void Tick()
     {

@@ -1,11 +1,32 @@
-using UnityEngine;
-using System.Collections;
 using DG.Tweening;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.XR;
 public class Car : MonoBehaviour
 {
     public bool IsMoving { get; private set; }
-    [SerializeField] private float speed = 4f;
-    [SerializeField] private ParticleSystem smokeEffect; 
+    public int capacity { get; private set; }
+    public List<MeshRenderer> meshes;
+
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private ParticleSystem smokeEffect;
+    [SerializeField] private TextMeshProUGUI capcityText;
+
+    public void SetColor(Material material)
+    {
+        foreach (var mesh in meshes)
+        {
+            mesh.material = material;
+        }
+    }
+
+    public void SetCapacityText(int number)
+    {
+        capacity = number;
+        capcityText.text = "0/" + capacity.ToString();
+    }
     public void MoveTo(Vector3 target)
     {
         StopAllCoroutines();

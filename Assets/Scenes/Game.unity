@@ -2145,7 +2145,25 @@ MonoBehaviour:
   - {fileID: 2075479162}
   - {fileID: 677186818}
   - {fileID: 197665522}
+  materials:
+  - {fileID: 2100000, guid: 1c6ff6db3f7b5d44f8e69bbcf6a3db33, type: 2}
+  - {fileID: 2100000, guid: d207eea593033c848b5bf49f1690e5b8, type: 2}
+  - {fileID: 2100000, guid: bfa43c9ae6b4052418cc9af06235dc10, type: 2}
+  - {fileID: 2100000, guid: b1f50e6da25cbb743a7b7917a8e89005, type: 2}
+  - {fileID: 2100000, guid: 3031eea2119f01647987d75f4b869ded, type: 2}
   parkingLine: {fileID: 556493829}
+  carDatas:
+  - {fileID: 11400000, guid: 0bb1dc4d289e1684aa4252dffeedb1df, type: 2}
+  - {fileID: 11400000, guid: 5f6206f8650a8da4aa5b71089d1909d5, type: 2}
+  - {fileID: 11400000, guid: 6aa651a209a5cfe4baa1a56f8630dec0, type: 2}
+  - {fileID: 11400000, guid: 0bb1dc4d289e1684aa4252dffeedb1df, type: 2}
+  - {fileID: 11400000, guid: 5f6206f8650a8da4aa5b71089d1909d5, type: 2}
+  - {fileID: 11400000, guid: dec086fd777cd64439284549e967fbf4, type: 2}
+  - {fileID: 11400000, guid: a93fba4b77ce0f542a304a266283da76, type: 2}
+  - {fileID: 11400000, guid: dec086fd777cd64439284549e967fbf4, type: 2}
+  - {fileID: 11400000, guid: 5f6206f8650a8da4aa5b71089d1909d5, type: 2}
+  - {fileID: 11400000, guid: 6aa651a209a5cfe4baa1a56f8630dec0, type: 2}
+  - {fileID: 11400000, guid: ade0fcd87e2115c40acd4e7f323730e7, type: 2}
 --- !u!1001 &1906229823
 PrefabInstance:
   m_ObjectHideFlags: 0
