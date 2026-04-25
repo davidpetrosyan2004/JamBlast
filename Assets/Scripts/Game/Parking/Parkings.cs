@@ -6,7 +6,7 @@ public class Parkings : MonoBehaviour
 {
     public List<TrafficSlot> parkings = new();
 
-    public Car GetCarInParkingsTheSameColor(CarData.CarColor squareColor)
+    public TrafficSlot GetParkingInParkingsTheSameColor(CarData.CarColor squareColor)
     {
         foreach (var parking in parkings)
         {
@@ -14,8 +14,7 @@ public class Parkings : MonoBehaviour
 
             if (car != null && car.carColor == squareColor)
             {
-            Debug.Log($"Checking parking slot with car color: {car?.carColor} against square color: {squareColor}");
-                return car;
+                return parking;
             }
         }
         return null;

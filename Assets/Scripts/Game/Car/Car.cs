@@ -1,20 +1,28 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.XR;
+using UnityEngine.Rendering;
+
 public class Car : MonoBehaviour
 {
     public bool IsMoving { get; private set; }
     public int capacity { get; private set; }
+    public int squaresCount { get; private set; }
     public List<MeshRenderer> meshes;
     public CarData.CarColor carColor; 
 
     [SerializeField] private float speed = 5f;
     [SerializeField] private ParticleSystem smokeEffect;
     [SerializeField] private TextMeshProUGUI capcityText;
-
+    [SerializeField] private LineRenderer exitPath;
+    private Vector3[] exitPathPoints;
+    private void Start()
+    {
+        exitPath.GetPositions(exitPathPoints = new Vector3[exitPath.positionCount]);
+    }
     public void SetColor(Material material, CarData.CarColor color)
     {
         foreach (var mesh in meshes)
@@ -29,15 +37,36 @@ public class Car : MonoBehaviour
         capacity = number;
         capcityText.text = "0/" + capacity.ToString();
     }
+
+    public void UpdateCapacityText(TrafficSlot parking)
+    {
+        squaresCount++;
+        capcityText.text = squaresCount.ToString() + "/" + capacity.ToString();
+        if(squaresCount >= capacity)
+        {
+            parking.car = null;
+            MoveAlongPath(transform.position, exitPathPoints, true);
+        }
+    }
     public void MoveTo(Vector3 target)
     {
         StopAllCoroutines();
         StartCoroutine(MoveRoutine(target));
     }
-    public void MoveAlongPath(Vector3 target, Vector3[] path)
+    public void MoveAlongPath(Vector3 target, Vector3[] path, bool exit=false)
     {
         StopAllCoroutines();
-        StartCoroutine(MovePath(target, path));
+        var pathToTarget = GetPathToTarget(target, path);
+        if (exit)
+        {
+            List<Vector3> reversedPath = new List<Vector3>(pathToTarget);
+            for (int i = pathToTarget.Length - 1; i >= 0; i--)
+            {
+                reversedPath[pathToTarget.Length - 1 - i] = pathToTarget[i];
+            }
+            pathToTarget = reversedPath.ToArray();
+        }
+        StartCoroutine(MovePath(target, pathToTarget));
     }
     private IEnumerator MoveRoutine(Vector3 target)
     {
@@ -61,11 +90,9 @@ public class Car : MonoBehaviour
 
         IsMoving = false;
     }
-    private IEnumerator MovePath(Vector3 target, Vector3[] pathPoints)
+    private IEnumerator MovePath(Vector3 target, Vector3[] pathToTarget)
     {
         IsMoving = true;
-
-        var pathToTarget = GetPathToTarget(target, pathPoints);
 
         int index = 0;
         smokeEffect.Play();

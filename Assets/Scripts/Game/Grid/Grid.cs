@@ -15,7 +15,7 @@ public class Grid : MonoBehaviour
     [SerializeField] private float squareGap = 0.1f;
     [SerializeField] private Vector2 startPosition = new();
     [SerializeField] private float squareScale = 0.5f;
-    [SerializeField] private float everySquareOffset = 0f;
+    //[SerializeField] private float everySquareOffset = 0f;
 
     private Vector2 offset = new();
     private List<GameObject> gridSquares = new();
@@ -210,6 +210,7 @@ public class Grid : MonoBehaviour
             return;
         }
         Debug.Log("Game Over");
+        GameEvents.GameOver(); 
     }
     private bool CanPlaceAtPosition(Shape shape, int startRow, int startCol)
     {

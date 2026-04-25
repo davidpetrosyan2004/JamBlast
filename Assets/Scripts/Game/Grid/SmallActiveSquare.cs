@@ -1,6 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 public class SmallActiveSquare : MonoBehaviour
 {
     [SerializeField] private Image spriteRenderer;
@@ -44,10 +45,20 @@ public class SmallActiveSquare : MonoBehaviour
     public void MoveToCars()
     {
         var parkings = FindAnyObjectByType<Parkings>();
-        var car = parkings.GetCarInParkingsTheSameColor(squareColor);
-        if (car != null)
+        var parking = parkings.GetParkingInParkingsTheSameColor(squareColor);
+        if (parking != null)
         {
-            transform.DOMove(car.transform.position, 0.5f).SetEase(Ease.InOutSine);
+            var car = parking.car;
+            if (car.squaresCount < car.capacity)
+            {
+                transform.DOMove(car.transform.position, 0.5f)
+                        .SetEase(Ease.InOutSine)
+                        .OnComplete(() => { car.UpdateCapacityText(parking); Destroy(transform.gameObject);});
+            }
+            else
+            {
+                Destroy(transform.gameObject);
+            }
         }
         else
         {

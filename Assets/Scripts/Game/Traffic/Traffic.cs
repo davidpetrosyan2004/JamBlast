@@ -45,7 +45,7 @@ public class Traffic : MonoBehaviour
     }
     public void SpawnCar()
     {
-        var car = Instantiate(carPrefab, spawnPoint.position, Quaternion.identity)
+        var car = Instantiate(carPrefab, spawnPoint.position, Quaternion.identity, spawnPoint)
                   .GetComponent<Car>();
         car.SetCapacityText(carDatas[carDataIndex].capacity);
         car.SetColor(GetMaterial(carDatas[carDataIndex].carColor), carDatas[carDataIndex].carColor);

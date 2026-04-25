@@ -4937,7 +4937,7 @@ GameObject:
   - component: {fileID: 264291295902109044}
   m_Layer: 0
   m_Name: "\u0411\u0435\u0437 \u0438\u043C\u0435\u043D\u04382 (1)"
-  m_TagString: Untagged
+  m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5610,7 +5610,7 @@ GameObject:
   - component: {fileID: 7117621845800446539}
   m_Layer: 0
   m_Name: Car
-  m_TagString: Untagged
+  m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5653,10 +5653,11 @@ MonoBehaviour:
   - {fileID: 6205467430822301170}
   - {fileID: 7032347176523429325}
   - {fileID: 2759321857983444466}
-  carColor: 
+  carColor: 0
   speed: 5
   smokeEffect: {fileID: 5938086731280985834}
   capcityText: {fileID: 4140627732083446013}
+  exitPath: {fileID: 2350293803173251954, guid: 5119e195bc5374340bd422f6e94df3ac, type: 3}
 --- !u!54 &389574729853887405
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5703,7 +5704,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.26, y: 0.34, z: 0.5}
+  m_Size: {x: 0.26, y: 0.46, z: 0.5}
   m_Center: {x: -0, y: 0.14, z: 0}
 --- !u!222 &7117621845800446539
 CanvasRenderer:

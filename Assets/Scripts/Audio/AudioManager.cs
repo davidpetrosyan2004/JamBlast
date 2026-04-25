@@ -28,7 +28,7 @@ public class AudioManager : MonoBehaviour
             sound.source.name = sound.name;
             sound.source.clip = sound.clip;
         }
-        //PlaySound("Theme");
+        PlaySound("Theme");
     }
 
     public void PlaySound(string soundName, bool oneShot = false)
