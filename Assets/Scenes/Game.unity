@@ -883,8 +883,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07efbfce3b1f0b14aa495cc1c09cb7d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Grid
-  columns: 4
-  rows: 4
+  columns: 6
+  rows: 6
   _shapeStorage: {fileID: 1606314715}
   _buffer: {fileID: 1468180210}
   gridSquare: {fileID: 1180655012282663047, guid: 3ff5373c51ec3c04ab45278c0a7eda21, type: 3}
@@ -2143,7 +2143,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 87a101b0ee783ce4aaee230609e07e8c, type: 2}
   - {fileID: 11400000, guid: e91e70d6a18c7b940a9379a5b4349bf4, type: 2}
   - {fileID: 11400000, guid: e9cd5e79632df9246b427773e7e21701, type: 2}
-  - {fileID: 11400000, guid: c552199ff8732b84e83c528001493a72, type: 2}
+  - {fileID: 11400000, guid: c0bf99171a268b44babe906fb8228d16, type: 2}
+  - {fileID: 11400000, guid: 2d75648108dc38c448936036e460b178, type: 2}
+  - {fileID: 11400000, guid: 7acef442580065e4aacbcb9b6475ac98, type: 2}
+  - {fileID: 11400000, guid: 16d58338038bb3748a38145181323649, type: 2}
+  - {fileID: 11400000, guid: 4591fce0f7ac53746871d5e7d8ade60a, type: 2}
+  - {fileID: 11400000, guid: 574cc66d5fa33a144afbad5351a57e8c, type: 2}
+  - {fileID: 11400000, guid: 81af12f50643ab94f8bb6651a3e4b792, type: 2}
+  - {fileID: 11400000, guid: 4e25f84bbd4f33d45915b11a004bd0b6, type: 2}
+  - {fileID: 11400000, guid: 84b0362ca463bc14fae719128c9edc90, type: 2}
+  - {fileID: 11400000, guid: 3d750111922f7924cb98e8ec9115abdc, type: 2}
+  - {fileID: 11400000, guid: 39906ca7a57bf0447a578fbd8adbd6e3, type: 2}
+  - {fileID: 11400000, guid: ed9e0400d20217e40a998c4643d70568, type: 2}
+  - {fileID: 11400000, guid: 19ad4092059ce9e44a06e36aace5d231, type: 2}
   shapeImages:
   - {fileID: 246330513, guid: 9a7e2c3d687affb4e8f9a0893c8a84ae, type: 3}
   - {fileID: -1126913597, guid: 9a7e2c3d687affb4e8f9a0893c8a84ae, type: 3}
