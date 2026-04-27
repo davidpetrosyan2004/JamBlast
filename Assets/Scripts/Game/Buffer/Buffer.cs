@@ -1,5 +1,9 @@
-using UnityEngine;
+using DG.Tweening;
 using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.LightTransport;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Buffer : MonoBehaviour
 {
@@ -8,6 +12,14 @@ public class Buffer : MonoBehaviour
     [SerializeField] private int capacity;
     public List<Shape> shapes = new();
     public List<BufferSlot> slots;
+
+    [SerializeField] private TextMeshProUGUI bufferText;
+    [SerializeField] private Transform bufferSpace;
+
+    private void Start()
+    {
+        bufferText.text = "Free: " + (capacity - shapes.Count).ToString();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -71,5 +83,33 @@ public class Buffer : MonoBehaviour
                 return true;
         }
         return false;
+    }
+    public void RemoveShape(Shape shape)
+    {
+        int previousCapacity = capacity - shapes.Count;
+        shapes.Remove(shape);
+        BufferCapacityChangedAnimation(previousCapacity, 1, bufferText);
+    }
+    public void AddShape(Shape shape)
+    {
+        int previousCapacity = capacity - shapes.Count;
+        shapes.Add(shape);
+        AudioManager.Instance.PlaySound("BufferAdd");
+        BufferCapacityChangedAnimation(previousCapacity, -1, bufferText);
+    }
+
+    public void BufferCapacityChangedAnimation(int startValue, int amount, TextMeshProUGUI scoreText)
+    {
+        int endValue = startValue+amount;
+        scoreText.DOKill();
+        scoreText.transform.DOKill();
+        Sequence seq = DOTween.Sequence();
+        seq.Join(DOTween.To(() => startValue, x =>
+        {
+            startValue = x;
+            scoreText.text = "Free: " + x.ToString();
+        }, endValue, 0.3f));
+
+        seq.Join(scoreText.transform.DOPunchScale(Vector3.one * 0.3f, 0.3f, 10, 1));
     }
 }

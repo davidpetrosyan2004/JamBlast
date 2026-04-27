@@ -19,8 +19,11 @@ public class Car : MonoBehaviour
     [SerializeField] private TextMeshProUGUI capcityText;
     [SerializeField] private LineRenderer exitPath;
     private Vector3[] exitPathPoints;
+
+    [SerializeField] private Animator carAnimator;
     private void Start()
     {
+        carAnimator = GetComponent<Animator>();
         exitPath.GetPositions(exitPathPoints = new Vector3[exitPath.positionCount]);
     }
     public void SetColor(Material material, CarData.CarColor color)
@@ -44,9 +47,15 @@ public class Car : MonoBehaviour
         capcityText.text = squaresCount.ToString() + "/" + capacity.ToString();
         if(squaresCount >= capacity)
         {
+            AudioManager.Instance.PlaySound("CarFulled");
             parking.car = null;
             MoveAlongPath(transform.position, exitPathPoints, true);
         }
+        else
+        {
+            AudioManager.Instance.PlaySound("CarFill");
+        }
+        carAnimator.SetTrigger("isFilled");
     }
     public void MoveTo(Vector3 target)
     {
@@ -162,7 +171,7 @@ public class Car : MonoBehaviour
         if (other == this) return;
         if (other.CompareTag("ScaleCar"))
         {
-            transform.DOScale(1.5f, 0.2f).SetLoops(1, LoopType.Yoyo);
+            carAnimator.SetBool("isBig", true);
         } 
     }
 }

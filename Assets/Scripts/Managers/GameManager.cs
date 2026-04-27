@@ -1,12 +1,22 @@
+using DG.Tweening;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject gameWinPanel;
+    [SerializeField] private GameObject bufferFullMessage;
+    [SerializeField] private GameObject gameOverCanvas;
+
+    [SerializeField] private Image niceOneMessage; 
+    [SerializeField] private Image youRockMessage; 
+    private Coroutine messageCoroutine;
     public static GameManager Instance { get; private set; }
     
     private void Awake()
     {
+        gameOverCanvas.SetActive(false);
         if (Instance == null)
         {
             Instance = this;
@@ -21,19 +31,25 @@ public class GameManager : MonoBehaviour
     {
         GameEvents.GameOver += OpenGameOverPanel;
         GameEvents.GameWin += OpenGameWinPanel;
+        GameEvents.ShowMessage += ShowMessage;
+        GameEvents.ComboLinesCompleted += ShowComboLinesCompleted;
     }
     private void OnDisable()
     {
         GameEvents.GameOver -= OpenGameOverPanel;
         GameEvents.GameWin -= OpenGameWinPanel;
+        GameEvents.ShowMessage -= ShowMessage;
+        GameEvents.ComboLinesCompleted -= ShowComboLinesCompleted;
     }
 
     public void OpenGameOverPanel()
     {
+        gameOverCanvas.SetActive(true);
         gameOverPanel.SetActive(true);
     }
     public void OpenGameWinPanel()
     {
+        gameOverCanvas.SetActive(true);
         int currentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
 
         int savedLevel = PlayerPrefs.GetInt("CurrentLevel", 1);
@@ -44,5 +60,41 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.Save();
         }
         gameWinPanel.SetActive(true);
+    }
+
+    public void ShowMessage()
+    {
+        if (messageCoroutine != null)
+        {
+            StopCoroutine(messageCoroutine);
+        }
+
+        messageCoroutine = StartCoroutine(ShowBufferFullMessage());
+    }
+    public IEnumerator ShowBufferFullMessage()
+    {
+        bufferFullMessage.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        bufferFullMessage.SetActive(false);
+    }
+
+    public void ShowComboLinesCompleted()
+    {
+        youRockMessage.transform.localScale = Vector3.zero;
+
+        youRockMessage.gameObject.SetActive(true);
+
+        Sequence seq = DOTween.Sequence();
+
+        // появление
+        seq.Append(youRockMessage.DOFade(1, 0.2f));
+        seq.Join(youRockMessage.transform.DOScale(0.01f, 0.3f).SetEase(Ease.OutBack));
+
+        // немного подержать
+        seq.AppendInterval(0.5f);
+
+        // исчезновение
+        seq.Append(youRockMessage.DOFade(0, 0.3f));
+        seq.Join(youRockMessage.transform.DOScale(0.0049f, 0.3f));
     }
 }

@@ -15,7 +15,8 @@ public class Grid : MonoBehaviour
     [SerializeField] private float squareGap = 0.1f;
     [SerializeField] private Vector2 startPosition = new();
     [SerializeField] private float squareScale = 0.5f;
-    //[SerializeField] private float everySquareOffset = 0f;
+
+    [SerializeField] private CameraShake cameraShaker;
 
     private Vector2 offset = new();
     private List<GameObject> gridSquares = new();
@@ -107,17 +108,25 @@ public class Grid : MonoBehaviour
                 }
             }
             if (IsLineCompleted)
-            {
-                AudioManager.Instance.PlaySound("LineCompleted");
+            { 
+                cameraShaker.Shake();
                 completedLines.Add(line);
             }
-            else
-            {
-                AudioManager.Instance.PlaySound("ShapePlaceInBoard");
-            }
         }
-
-        foreach(var line in completedLines)
+        if(completedLines.Count == 1)
+        {
+            AudioManager.Instance.PlaySound("OneLineCompleted");
+        }
+        else if(completedLines.Count > 1) 
+        {
+            GameEvents.ComboLinesCompleted();
+            AudioManager.Instance.PlaySound("TwoLinesCompleted");
+        }
+        else if(completedLines.Count < 1)
+        {
+            AudioManager.Instance.PlaySound("ShapePlaceInBoard");
+        }
+        foreach (var line in completedLines)
         {
             foreach(var squareIndex in line)
             {
@@ -161,7 +170,7 @@ public class Grid : MonoBehaviour
             }
             if (currentSelectedShape.IsInBuffer)
             {
-                _buffer.shapes.Remove(currentSelectedShape);
+                _buffer.RemoveShape(currentSelectedShape);
                 _buffer.FreeSlotWithGivenShape(currentSelectedShape);
             }
             else
@@ -273,8 +282,13 @@ public class Grid : MonoBehaviour
 
             _buffer.slots[slot].occupiedShape = shape;
             shape.IsInBuffer = true;
-            _buffer.shapes.Add(shape);
+            _buffer.AddShape(shape);
             CheckIfPlayerLost();
+        }
+        else if(!shape.IsInBuffer && slot == -1)
+        {
+            GameEvents.ShowMessage();
+            shape.MoveShapeToStartPosition();
         }
         else
         {
