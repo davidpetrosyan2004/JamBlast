@@ -4937,7 +4937,7 @@ GameObject:
   - component: {fileID: 264291295902109044}
   m_Layer: 0
   m_Name: "\u0411\u0435\u0437 \u0438\u043C\u0435\u043D\u04382 (1)"
-  m_TagString: Car
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5611,7 +5611,7 @@ GameObject:
   - component: {fileID: 4995639218819509319}
   m_Layer: 0
   m_Name: Car
-  m_TagString: Car
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5864,7 +5864,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2967592702625034675, guid: f9fb0d42f406ee74aa45882068e09d3a, type: 3}
       propertyPath: m_fontColor.b
-      value: 0.49999988
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2967592702625034675, guid: f9fb0d42f406ee74aa45882068e09d3a, type: 3}
       propertyPath: m_fontColor.g
@@ -5872,7 +5872,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2967592702625034675, guid: f9fb0d42f406ee74aa45882068e09d3a, type: 3}
       propertyPath: m_fontColor.r
-      value: 0.9389507
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2967592702625034675, guid: f9fb0d42f406ee74aa45882068e09d3a, type: 3}
       propertyPath: m_fontSizeBase
@@ -5884,7 +5884,7 @@ PrefabInstance:
       objectReference: {fileID: 6904556188794242652, guid: e377896b1ba050849a69749edf54ede2, type: 2}
     - target: {fileID: 2967592702625034675, guid: f9fb0d42f406ee74aa45882068e09d3a, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4286578671
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 2967592702625034675, guid: f9fb0d42f406ee74aa45882068e09d3a, type: 3}
       propertyPath: m_VerticalAlignment

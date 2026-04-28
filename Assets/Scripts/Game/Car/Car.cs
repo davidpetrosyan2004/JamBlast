@@ -173,5 +173,9 @@ public class Car : MonoBehaviour
         {
             carAnimator.SetBool("isBig", true);
         } 
+        else if (other.CompareTag("CarDestroyer"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

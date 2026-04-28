@@ -5,7 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - ScaleCar
-  - Car
+  - CarDestroyer
   layers:
   - Default
   - TransparentFX
