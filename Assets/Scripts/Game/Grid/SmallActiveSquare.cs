@@ -1,7 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 public class SmallActiveSquare : MonoBehaviour
 {
     [SerializeField] private Image spriteRenderer;

@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Image youRockMessage; 
     private Coroutine messageCoroutine;
     public static GameManager Instance { get; private set; }
-    
     private void Awake()
     {
         gameOverCanvas.SetActive(false);
@@ -35,7 +34,7 @@ public class GameManager : MonoBehaviour
         GameEvents.ComboLinesCompleted += ShowComboLinesCompleted;
     }
     private void OnDisable()
-    {
+    { 
         GameEvents.GameOver -= OpenGameOverPanel;
         GameEvents.GameWin -= OpenGameWinPanel;
         GameEvents.ShowMessage -= ShowMessage;
@@ -44,11 +43,13 @@ public class GameManager : MonoBehaviour
 
     public void OpenGameOverPanel()
     {
+        AudioManager.Instance.PlaySound("GameLose");
         gameOverCanvas.SetActive(true);
         gameOverPanel.SetActive(true);
     }
     public void OpenGameWinPanel()
     {
+        AudioManager.Instance.PlaySound("GameWin");
         gameOverCanvas.SetActive(true);
         int currentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
 
@@ -86,14 +87,11 @@ public class GameManager : MonoBehaviour
 
         Sequence seq = DOTween.Sequence();
 
-        // появление
         seq.Append(youRockMessage.DOFade(1, 0.2f));
         seq.Join(youRockMessage.transform.DOScale(0.01f, 0.3f).SetEase(Ease.OutBack));
 
-        // немного подержать
         seq.AppendInterval(0.5f);
 
-        // исчезновение
         seq.Append(youRockMessage.DOFade(0, 0.3f));
         seq.Join(youRockMessage.transform.DOScale(0.0049f, 0.3f));
     }

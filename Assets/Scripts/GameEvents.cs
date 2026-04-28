@@ -9,4 +9,5 @@ public class GameEvents : MonoBehaviour
     public static Action GameWin;
     public static Action ShowMessage;
     public static Action ComboLinesCompleted;
+    public static Action CarCompleted;
 }

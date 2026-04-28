@@ -26,4 +26,10 @@ public class SceneButtonBinder : MonoBehaviour
             button.onClick.AddListener(() => SceneManager.LoadScene(sceneName));
         }
     }
+
+
+    public void PlaySound()
+    {
+        AudioManager.Instance.PlaySound("StartButton");
+    }
 }

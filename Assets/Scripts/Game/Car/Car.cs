@@ -18,6 +18,7 @@ public class Car : MonoBehaviour
     [SerializeField] private ParticleSystem smokeEffect;
     [SerializeField] private TextMeshProUGUI capcityText;
     [SerializeField] private LineRenderer exitPath;
+    [SerializeField] private ParticleSystem carsFulledEffect;
     private Vector3[] exitPathPoints;
 
     [SerializeField] private Animator carAnimator;
@@ -45,17 +46,14 @@ public class Car : MonoBehaviour
     {
         squaresCount++;
         capcityText.text = squaresCount.ToString() + "/" + capacity.ToString();
-        if(squaresCount >= capacity)
+        carAnimator.SetTrigger("isFilled");
+        if(squaresCount == capacity)
         {
-            AudioManager.Instance.PlaySound("CarFulled");
             parking.car = null;
+            carsFulledEffect.Play();
+            GameEvents.CarCompleted();
             MoveAlongPath(transform.position, exitPathPoints, true);
         }
-        else
-        {
-            AudioManager.Instance.PlaySound("CarFill");
-        }
-        carAnimator.SetTrigger("isFilled");
     }
     public void MoveTo(Vector3 target)
     {

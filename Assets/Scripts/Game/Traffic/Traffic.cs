@@ -1,4 +1,6 @@
+using DG.Tweening;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Traffic : MonoBehaviour
@@ -12,6 +14,8 @@ public class Traffic : MonoBehaviour
 
     [SerializeField] private LineRenderer parkingLine; 
     [SerializeField] private List<CarData> carDatas;
+    [SerializeField] private TextMeshProUGUI carsCountText;
+    private int carsCount;
     private int carDataIndex = 0;
 
     private Queue<Car> queue = new();
@@ -34,8 +38,19 @@ public class Traffic : MonoBehaviour
             return null;
     }
 
+    private void OnEnable()
+    {
+        GameEvents.CarCompleted += UpdateCarsCountText;
+    }
+    private void OnDisable()
+    {
+        GameEvents.CarCompleted -= UpdateCarsCountText;
+    }
+
     private void Start()
     {
+        carsCount = carDatas.Count;
+        carsCountText.text = carsCount.ToString();
         parkingLine.GetPositions(pathPoints = new Vector3[parkingLine.positionCount]);
         for (int i = 0; i < carDatas.Count; i++ )
         {
@@ -106,6 +121,27 @@ public class Traffic : MonoBehaviour
                 trafficSlots[i].car = car;
                 car.MoveTo(trafficSlots[i].point.position);
             }
+        }
+    }
+
+    public void UpdateCarsCountText()
+    {
+        AudioManager.Instance.PlaySound("CarFulled");
+        carsCountText.DOKill();
+        carsCountText.transform.DOKill();
+        int startValue = carsCount;
+        carsCount--;
+        carsCountText.text = carsCount.ToString();
+        Sequence seq = DOTween.Sequence();
+        seq.Join(DOTween.To(() => startValue, x =>
+        {
+            startValue = x;
+            carsCountText.text = x.ToString();
+        }, carsCount, 0.3f));
+        seq.Join(carsCountText.transform.DOPunchScale(Vector3.one * 0.3f, 0.3f, 10, 1));
+        if (carsCount <= 0)
+        {
+            GameEvents.GameWin();
         }
     }
 }

@@ -1632,17 +1632,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2621462196943976357}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 55.69766}
+  m_LocalScale: {x: 0.0048843394, y: 0.0048843394, z: 0.0048843394}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8937334713543729213}
-  m_Father: {fileID: 7863527013410680469}
+  m_Father: {fileID: 5023049550789715344}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -278, y: -947}
+  m_AnchoredPosition: {x: -2.9221802, y: -10.895264}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8859628595651551584
@@ -1727,7 +1727,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8144000564718672226}
+      - m_Target: {fileID: 7836000179128734268}
         m_TargetAssemblyTypeName: WinLose, Assembly-CSharp
         m_MethodName: Win
         m_Mode: 1
@@ -1904,17 +1904,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2902760795694840479}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 55.69766}
+  m_LocalScale: {x: 0.0048843394, y: 0.0048843394, z: 0.0048843394}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9107209098728541268}
-  m_Father: {fileID: 7863527013410680469}
+  m_Father: {fileID: 5023049550789715344}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10, y: -947}
+  m_AnchoredPosition: {x: -1.6131592, y: -10.895264}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7900624141263109669
@@ -1999,7 +1999,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8144000564718672226}
+      - m_Target: {fileID: 7836000179128734268}
         m_TargetAssemblyTypeName: WinLose, Assembly-CSharp
         m_MethodName: Lose
         m_Mode: 1
@@ -2571,6 +2571,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9125fbb87277a1648a72cb114792c33f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraShake
+--- !u!1 &4251444799622892772
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5023049550789715344}
+  - component: {fileID: 7836000179128734268}
+  m_Layer: 0
+  m_Name: WinLoseScript
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5023049550789715344
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4251444799622892772}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 320.27484, y: 1283.6736, z: -11403.314}
+  m_LocalScale: {x: 204.73598, y: 204.73598, z: 204.73598}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7400067339893551273}
+  - {fileID: 5369153221781470828}
+  m_Father: {fileID: 7863527013410680469}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7836000179128734268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4251444799622892772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4d4591c2ffd59498e2f5604851b2ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WinLose
 --- !u!1 &4491879289954772230
 GameObject:
   m_ObjectHideFlags: 0
@@ -3046,8 +3092,7 @@ RectTransform:
   - {fileID: 8313055601835274540}
   - {fileID: 5382323730025975874}
   - {fileID: 3378708418505171826}
-  - {fileID: 7400067339893551273}
-  - {fileID: 5369153221781470828}
+  - {fileID: 5023049550789715344}
   m_Father: {fileID: 5972401083789158349}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3936,93 +3981,12 @@ Transform:
   - {fileID: 7863527013410680469}
   - {fileID: 3074510193420203137}
   - {fileID: 61035231406886619}
-  - {fileID: 4024864287124503065}
   - {fileID: 2691291615714183187}
   - {fileID: 1650968284388629774}
   - {fileID: 3117691407490416462}
   - {fileID: 2133989119210596303}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7721080721279299051
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4024864287124503065}
-  - component: {fileID: 5340570036207779834}
-  m_Layer: 0
-  m_Name: AudioManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4024864287124503065
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7721080721279299051}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -664.8983, y: -1457.1357, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5972401083789158349}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5340570036207779834
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7721080721279299051}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3606617c93673e14ba46a59d979fe365, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
-  sounds:
-  - name: Theme
-    volume: 0.05
-    loop: 1
-    source: {fileID: 0}
-    clip: {fileID: 8300000, guid: 5629cd690ce3202458e988ede375f2d2, type: 3}
-  - name: BufferAdd
-    volume: 0.5
-    loop: 0
-    source: {fileID: 0}
-    clip: {fileID: 8300000, guid: 68b12bc1a0583c647802e9cf7d812b04, type: 3}
-  - name: ShapePickUp
-    volume: 0.3
-    loop: 0
-    source: {fileID: 0}
-    clip: {fileID: 8300000, guid: 9e772686709e00b4b9ac4e85530ed82d, type: 3}
-  - name: CarFulled
-    volume: 0.5
-    loop: 0
-    source: {fileID: 0}
-    clip: {fileID: 8300000, guid: aa34ca2c80d645040b78599d49b213de, type: 3}
-  - name: TwoLinesCompleted
-    volume: 0.3
-    loop: 0
-    source: {fileID: 0}
-    clip: {fileID: 8300000, guid: 2185d156e83be0a44a2b57414b07e6f1, type: 3}
-  - name: OneLineCompleted
-    volume: 0.3
-    loop: 0
-    source: {fileID: 0}
-    clip: {fileID: 8300000, guid: 8ff98dccf1b5850498e440c885ddb585, type: 3}
-  - name: ShapePlaceInBoard
-    volume: 0.5
-    loop: 0
-    source: {fileID: 0}
-    clip: {fileID: 8300000, guid: 8876a6df057fd0c498c6a5531a920bf8, type: 3}
 --- !u!1 &7926747989323850717
 GameObject:
   m_ObjectHideFlags: 0
