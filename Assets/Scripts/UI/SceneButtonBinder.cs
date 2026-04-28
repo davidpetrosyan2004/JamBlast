@@ -30,6 +30,6 @@ public class SceneButtonBinder : MonoBehaviour
 
     public void PlaySound()
     {
-        AudioManager.Instance.PlaySound("StartButton");
+        AudioManager.Instance.PlaySound("ButtonClick");
     }
 }

@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9feaf2f48d8d09b41a745250c515f55a, type: 3}
-  m_Name: Orange Car 5
-  m_EditorClassIdentifier: Assembly-CSharp::CarData
-  capacity: 5
-  carColor: 4
+  m_Script: {fileID: 11500000, guid: 1a661026317068a45b3391a54388f586, type: 3}
+  m_Name: Shape 13
+  m_EditorClassIdentifier: Assembly-CSharp::ShapeData
+  columns: 3
+  rows: 2
+  board:
+  - column: 000101
+  - column: 010100

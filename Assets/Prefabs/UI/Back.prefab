@@ -167,6 +167,7 @@ GameObject:
   - component: {fileID: 4114724917310280182}
   - component: {fileID: 8806896460210678958}
   - component: {fileID: 465102060567104261}
+  - component: {fileID: 8953898677376340751}
   m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
@@ -275,4 +276,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8806896460210678958}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8953898677376340751}
+        m_TargetAssemblyTypeName: SceneButtonBinder, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8953898677376340751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2386577428256504716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75de66c23079d1a418407df8d3e07d43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneButtonBinder
+  sceneName: MainMenu
+  button: {fileID: 465102060567104261}
+  buttonType: 0

@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        DontDestroyOnLoad(gameObject);
         Instance = this;
     }
     public void Start()
@@ -43,6 +44,25 @@ public class AudioManager : MonoBehaviour
         if (sound != null)
         {
             sound.source.Stop();
+        }
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        SoundEffect sound = Array.Find(sounds, x => x.name == "Theme");
+        if (sound != null)
+        {
+            sound.source.volume = volume;
+        }
+    }
+    public void SetSoundsVolume(float volume)
+    {
+        foreach (var sound in sounds)
+        {
+            if (sound.name != "Theme")
+            {
+                sound.source.volume = volume;
+            }
         }
     }
 }
