@@ -109,16 +109,17 @@ public class Grid : MonoBehaviour
             }
             if (IsLineCompleted)
             { 
-                cameraShaker.Shake();
                 completedLines.Add(line);
             }
         }
         if(completedLines.Count == 1)
         {
+            cameraShaker.Shake();
             AudioManager.Instance.PlaySound("OneLineCompleted");
         }
         else if(completedLines.Count > 1) 
         {
+            cameraShaker.Shake();
             GameEvents.ComboLinesCompleted();
             AudioManager.Instance.PlaySound("TwoLinesCompleted");
         }

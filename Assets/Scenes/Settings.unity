@@ -343,10 +343,22 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.04
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 376739708}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: SetMusicVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &132412444
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,6 +434,106 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 132412444}
   m_CullTransparentMesh: 1
+--- !u!1 &376739707
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 376739709}
+  - component: {fileID: 376739708}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &376739708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376739707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3606617c93673e14ba46a59d979fe365, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  sounds:
+  - name: StartTheme
+    volume: 0.05
+    loop: 1
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 38d7663ecdc92094688e82f562658cd9, type: 3}
+  - name: Theme
+    volume: 0.05
+    loop: 1
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 4eb9cc5f1fd3c9c45a8c26155f86d70f, type: 3}
+  - name: ShapePickUp
+    volume: 0.3
+    loop: 0
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 9e772686709e00b4b9ac4e85530ed82d, type: 3}
+  - name: ShapePlaceInBoard
+    volume: 0.5
+    loop: 0
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 8876a6df057fd0c498c6a5531a920bf8, type: 3}
+  - name: BufferAdd
+    volume: 0.5
+    loop: 0
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 68b12bc1a0583c647802e9cf7d812b04, type: 3}
+  - name: CarFulled
+    volume: 0.5
+    loop: 0
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: a0c4a6454c6a1124e910d217be75ed91, type: 3}
+  - name: TwoLinesCompleted
+    volume: 0.3
+    loop: 0
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 5c3f6668199db6343ab98699d98b8c42, type: 3}
+  - name: OneLineCompleted
+    volume: 0.3
+    loop: 0
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 0f48ccb02f3f20747969b312fc5a7a0d, type: 3}
+  - name: StartButton
+    volume: 0.5
+    loop: 0
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 06d78dcb6a036f24faaffc93c218b196, type: 3}
+  - name: GameWin
+    volume: 0.5
+    loop: 0
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 02e96cf673df8ba4f8c3fef390c79513, type: 3}
+  - name: GameLose
+    volume: 0.5
+    loop: 0
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 4c002c56a711c714a900cf764ff70b89, type: 3}
+--- !u!4 &376739709
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376739707}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.6062622, y: 0.42504883, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &394535653
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,10 +621,22 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 376739708}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: SetSoundsVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &688529342
 GameObject:
   m_ObjectHideFlags: 0
@@ -1877,3 +2001,4 @@ SceneRoots:
   - {fileID: 1434007853}
   - {fileID: 1076672670}
   - {fileID: 1561751743}
+  - {fileID: 376739709}

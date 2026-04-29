@@ -1,5 +1,6 @@
-using UnityEngine;
+using NUnit.Framework;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class ShapeStorage : MonoBehaviour
 {
@@ -40,11 +41,12 @@ public class ShapeStorage : MonoBehaviour
         for(int i = 0; i < capacity; i++)
         {
             var shape = Instantiate(shapePrefab, shapesPoses[i], Quaternion.identity, transform).GetComponent<Shape>();
-            
-            var newShapeData = Random.Range(0, shapeDatas.Count);
-            var newShapeImage = Random.Range(0, shapeImages.Count);
+            Shuffle(shapeDatas);
+            Shuffle(shapeImages);
+            //var newShapeData = Random.Range(0, shapeDatas.Count);
+            //var newShapeImage = Random.Range(0, shapeImages.Count);
 
-            shape.CreateShape(shapeDatas[newShapeData], shapeImages[newShapeImage]);
+            shape.CreateShape(shapeDatas[0], shapeImages[0]);
             shapes.Add(shape);
         }
     }
@@ -54,6 +56,16 @@ public class ShapeStorage : MonoBehaviour
         if (shapes.Count <= 0)
         {
             SpawnNewShapes();
+        }
+    }
+    void Shuffle<T>(List<T> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            int rnd = Random.Range(i, list.Count);
+            var temp = list[i];
+            list[i] = list[rnd];
+            list[rnd] = temp;
         }
     }
 }

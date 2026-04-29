@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameWinPanel;
     [SerializeField] private GameObject bufferFullMessage;
     [SerializeField] private GameObject gameOverCanvas;
+    [SerializeField] private GameObject NextButton;
 
     [SerializeField] private Image niceOneMessage; 
     [SerializeField] private Image youRockMessage; 
@@ -52,7 +53,10 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.PlaySound("GameWin");
         gameOverCanvas.SetActive(true);
         int currentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
-
+        if(currentLevel == 10)
+        {
+            NextButton.SetActive(false);
+        }
         int savedLevel = PlayerPrefs.GetInt("CurrentLevel", 1);
 
         if (currentLevel >= savedLevel)
